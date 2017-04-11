@@ -1,5 +1,6 @@
 # ChatToDiscord
 send messages from your PMMP server to Discord
+
 [View on Poggit](https://poggit.pmmp.io/ci/eDroiid/ChatToDiscord/ChatToDiscord)
 
 # Setting It Up
@@ -17,6 +18,9 @@ send messages from your PMMP server to Discord
 
 # How It Will Look
 Config:
+
 ![](http://puu.sh/vh0kC/311c7de82f.png)
+
 Discord:
+
 ![](http://puu.sh/vgZ3R/04d3fb2d4a.png)
