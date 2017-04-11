@@ -1,0 +1,13 @@
+# ChatToDiscord
+
+webhooks: []
+# [ARRAY] [URL] Discord channel webhook urls
+
+username: ''
+# [TEXT] Username to send messages as..
+
+avatar: ''
+# [URL] Profile picture
+
+message_format: '{player}: {message}'
+# [TEXT] Message format. Tags: {player} => Player name, {message} => player message
