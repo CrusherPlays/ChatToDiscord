@@ -29,8 +29,8 @@ class main extends PluginBase implements Listener {
             $this->webhooks = [$this->getConfig()->get('webhooks')];
         }
         $this->username = ($this->getConfig()->get('username') == "" ? "ChatToDiscord by eDroid" : (string)$this->getConfig()->get('username'));
-        $this->avatar = ($this->getConfig()->get('avatar') == "" ? "https://lh3.googleusercontent.com/_4zBNFjA8S9yjNB_ONwqBvxTvyXYdC7Nh1jYZ2x6YEcldBr2fyijdjM2J5EoVdTpnkA=w300" : (string)$this->getConfig()->get('avatar'));
-        $this->message_format = ($this->getConfig()->get('message_format') == "" ? "{player}: {message}" : (string)$this->getConfig()->get('message_format'));
+        $this->avatar = ($this->getConfig()->get('avatar') == "" ? "https://github.com/eDroiid/ChatToDiscord/raw/master/discord.png" : (string)$this->getConfig()->get('avatar'));
+        $this->message_format = ($this->getConfig()->get('message_format') == "" ? "``{player}:` ```{message}```" : (string)$this->getConfig()->get('message_format'));
     }
     public function onDisable(){
         $this->getLogger()->info("Disabled");
