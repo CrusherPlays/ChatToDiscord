@@ -1,10 +1,12 @@
 <?php
 namespace eDroid\ChatToDiscord\tasks;
 
+use eDroid\ChatToDiscord\main as CTD;
 use pocketmine\scheduler\AsyncTask;
+use pocketmine\Server;
 
 class sendMessage extends AsyncTask {
-    public $data;
+    private $data;
     public function __construct($data){
         $this->data = $data;
     }
@@ -16,6 +18,11 @@ class sendMessage extends AsyncTask {
                 "avatar" => $this->data["user"]["avatar"]
             ], $this->data["message"]);
         }
+    }
+    public function onCompletion(Server $server){
+        $ctd = $server->getPluginManager()->getPlugin('ChatToDiscord');
+        if(!$ctd instanceof CTD && !$ctd->isEnabled()) return;
+        if($this->getResult()[0] === true) $ctd->getLogger()->warning("Error sending message to Discord with curl: " . $this->getResult()[1]);
     }
     public function send($data, $message){
         $curl = curl_init();
@@ -31,6 +38,11 @@ class sendMessage extends AsyncTask {
                 "avatar_url" => $data["avatar"]
             ])
         ));
-        curl_exec($curl);
+        $response = curl_exec($curl);
+        if($response === false){
+            $this->setResult(array(true, curl_error($curl)));
+        }else{
+            $this->setResult(array(false, ""));
+        }
     }
 }
