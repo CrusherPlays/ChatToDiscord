@@ -31,10 +31,6 @@ class sendMessage extends AsyncTask {
                 "avatar_url" => $data["avatar"]
             ])
         ));
-        $response = curl_exec($curl);
-        $error = curl_error($curl);
-        if($response === false){
-            echo "[ChatToDiscord] [Error] Sending message to Discord failed: {$error}", PHP_EOL;
-        }
+        curl_exec($curl);
     }
 }
