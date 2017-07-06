@@ -1,12 +1,16 @@
 <?php
 namespace eDroid\ChatToDiscord;
 
-use eDroid\ChatToDiscord\action\sendMessage;
+use eDroid\ChatToDiscord\tasks\sendMessage;
+use pocketmine\event\player\PlayerChatEvent;
 use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
-use pocketmine\event\player\PlayerCommandPreprocessEvent;
 
 class main extends PluginBase implements Listener {
+    public $webhooks;
+    public $username;
+    public $avatar;
+    public $message_format;
     public function onLoad(){
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
@@ -19,25 +23,32 @@ class main extends PluginBase implements Listener {
                 $this->getLogger()->warning('You need to add a discord webhook in order for ChatToDiscord to work.');
                 $this->getServer()->getPluginManager()->disablePlugin($this);
             }else{
-                $this->webhooks = $this->getConfig()->get('webhooks');
+                $this->webhooks = (array)$this->getConfig()->get('webhooks');
             }
         }else{
             $this->webhooks = [$this->getConfig()->get('webhooks')];
         }
-        $this->username = ($this->getConfig()->get('username') === "" ? "ChatToDiscord by eDroid" : $this->getConfig()->get('username'));
-        $this->avatar = ($this->getConfig()->get('avatar') === "" ? "https://lh3.googleusercontent.com/_4zBNFjA8S9yjNB_ONwqBvxTvyXYdC7Nh1jYZ2x6YEcldBr2fyijdjM2J5EoVdTpnkA=w300" : $this->getConfig()->get('avatar'));
-        $this->message_format = ($this->getConfig()->get('message_format') === "" ? "{player}: {message}" : $this->getConfig()->get('message_format'));
+        $this->username = ($this->getConfig()->get('username') == "" ? "ChatToDiscord by eDroid" : (string)$this->getConfig()->get('username'));
+        $this->avatar = ($this->getConfig()->get('avatar') == "" ? "https://lh3.googleusercontent.com/_4zBNFjA8S9yjNB_ONwqBvxTvyXYdC7Nh1jYZ2x6YEcldBr2fyijdjM2J5EoVdTpnkA=w300" : (string)$this->getConfig()->get('avatar'));
+        $this->message_format = ($this->getConfig()->get('message_format') == "" ? "{player}: {message}" : (string)$this->getConfig()->get('message_format'));
     }
     public function onDisable(){
         $this->getLogger()->info("Disabled");
     }
 
-    public function onChat(PlayerCommandPreprocessEvent $event){
-        $message = $event->getMessage();
+    public function onPlayerChat(PlayerChatEvent $event){
+        $message = str_replace(["§0", "§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§a", "§b", "§c", "§d", "§e", "§f", "§k", "§l", "§n", "§o", "§r"], "", $event->getMessage());
         $player = $event->getPlayer()->getName();
         $message = str_replace(["{player}", "{message}"], [$player, $message], $this->message_format);
-        foreach($this->webhooks as $hook){
-            new sendMessage($this, $hook, $message);
-        }
+        $this->getServer()->getScheduler()->scheduleAsyncTask(new sendMessage(
+            [
+                "webhooks" => $this->webhooks,
+                "message" => $message,
+                "user" => [
+                    "name" => $this->username,
+                    "avatar" => $this->avatar
+                ]
+            ]
+        ));
     }
 }
