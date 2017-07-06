@@ -9,5 +9,5 @@ username: ''
 avatar: ''
 # [URL] Profile picture
 
-message_format: '{player}: {message}'
+message_format: '`{player}:` ```{message}```'
 # [TEXT] Message format. Tags: {player} => Player name, {message} => player message
