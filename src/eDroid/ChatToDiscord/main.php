@@ -7,10 +7,7 @@ use pocketmine\plugin\PluginBase;
 use pocketmine\event\Listener;
 
 class main extends PluginBase implements Listener {
-    public $webhooks;
-    public $username;
-    public $avatar;
-    public $message_format;
+    private $webhooks, $username, $avatar, $message_format;
     public function onLoad(){
         @mkdir($this->getDataFolder());
         $this->saveDefaultConfig();
@@ -37,6 +34,7 @@ class main extends PluginBase implements Listener {
     }
 
     public function onPlayerChat(PlayerChatEvent $event){
+        if($event->isCancelled()) return;
         $message = str_replace(["§0", "§1", "§2", "§3", "§4", "§5", "§6", "§7", "§8", "§9", "§a", "§b", "§c", "§d", "§e", "§f", "§k", "§l", "§n", "§o", "§r"], "", $event->getMessage());
         $player = $event->getPlayer()->getName();
         $message = str_replace(["{player}", "{message}"], [$player, $message], $this->message_format);
