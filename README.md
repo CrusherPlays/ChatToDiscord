@@ -1,3 +1,4 @@
+<img src=discord.png width=1000>
 # ChatToDiscord
 send messages from your PMMP server to Discord
 
