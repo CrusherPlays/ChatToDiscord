@@ -28,6 +28,6 @@ Discord:
 - [x] Add async so it doesn't lag main thread
 - [x] Add multiple webhook support
 - [ ] Add ability to send messages of events
- - on join
- - on quit
- - on death
+ - [ ] on join
+ - [ ] on quit
+ - [ ] on death
