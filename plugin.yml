@@ -1,7 +1,7 @@
 name: ChatToDiscord
 main: eDroid\ChatToDiscord\main
 version: 1.1.0
-api: [3.0.0, 3.0.0-ALPHA6, 3.0.0-ALPHA7]
+api: [3.0.0, 3.0.0-ALPHA8, 3.0.0-ALPHA9]
 load: STARTUP
 author: eDroid
 description: get messages from mcpe to discord
