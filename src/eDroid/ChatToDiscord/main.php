@@ -1,5 +1,5 @@
 <?php
-namespace eDroid\ChatToDiscord;
+namespace crusher/dis2mc;
 
 use eDroid\ChatToDiscord\tasks\sendMessage;
 use pocketmine\event\player\PlayerChatEvent;
