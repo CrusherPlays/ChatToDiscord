@@ -1,13 +1,55 @@
-# ChatToDiscord
+settings:
 
-webhooks: []
-# [ARRAY] [URL] Discord channel webhook urls
+  token: 'TOKEN_HERE'
 
-username: ''
-# [TEXT] Username to send messages as..
+  send_game_login: true
 
-avatar: ''
-# [URL] Profile picture
+  send_game_logout: true
 
-message_format: '`{player}:` ```{message}```'
-# [TEXT] Message format. Tags: {player} => Player name, {message} => player message
+  send_game_chat: true
+
+  send_game_chat_also_to_console: true
+
+  send_discord_chat: true
+
+  send_death_message: true
+
+  use_nicknames: false
+
+  use_mentions: true
+
+  use_ingame_format: false
+
+  check_for_updates: true
+
+  admin_chat_prefix: "§cAdminChat>"
+
+  templates:
+
+    chat_message_discord: '**%user**: %message'
+
+    player_join_minecraft: '%user joined the game'
+
+    player_leave_minecraft: '%user left the game'
+
+    chat_message_minecraft: '&b(discord [%channel]) &r%user >> %message'
+
+  channels:
+
+    minecraft_to_discord:
+
+      - 'chatlog'
+
+      - 'chatting'
+
+    discord_to_minecraft:
+
+      - 'chatting'
+
+      - 'announcement'
+
+  discord_commands:
+
+    enabled: true
+
+    command_prefix: '?'
