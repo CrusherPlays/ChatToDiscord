@@ -1,7 +1,66 @@
-name: ChatToDiscord
-main: eDroid\ChatToDiscord\main
-version: 1.1.0
-api: [3.0.0, 3.0.0-ALPHA8, 3.0.0-ALPHA9, 3.0.0-ALPHA10]
-load: STARTUP
-author: eDroid
-description: get messages from mcpe to discord
+name: Discord2Leet
+
+author: Crusher
+
+version: 1.0.0.b1
+
+main: Crusher\ChatToDiscord\main 
+
+description: sends messages from discord to a minectaft bedrock server
+
+
+
+commands:
+
+  discord:
+
+    description: Command for Discord to MCPE
+
+    usage: /<command> <args>
+
+
+
+permissions:
+
+  discord2game.*:
+
+    description: Grants access to all Discord to MCPE features
+
+    children:
+
+      discord2game.chat: true
+
+      discord2game.admin: true
+
+      discord2game.command.send: true
+
+      discord2game.command.logout: true
+
+      discord2game.command.login: true
+
+      discord2game.comamand.lookup: true
+
+  discord2game.chat:
+
+    default: op
+
+  discord2game.admin:
+
+        default: op
+
+  discord2game.command.send:
+
+        default: op
+
+  discord2game.command.logout:
+
+        default: op
+
+  discord2game.command.login:
+
+        default: op
+
+  discord2game.command.lookup:
+
+        default: op
+
